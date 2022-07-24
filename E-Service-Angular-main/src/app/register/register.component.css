@@ -1,0 +1,28 @@
+.reg {
+    height: 130vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.conts {
+    box-shadow: 0 0 15px 6px #00000096;
+    border-radius: 20px;
+    width: 35%;
+    height: 120vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+span{
+    font-size: smaller;
+}
+pre{
+    font-size: smaller;
+}
+button{
+    border-radius: 10px;
+}

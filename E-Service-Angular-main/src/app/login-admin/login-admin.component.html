@@ -1,0 +1,24 @@
+<body>
+    <form class="form-signin" (ngSubmit)="onSubmit(signInForm)" #signInForm="ngForm">
+        <div class="login">
+            <div class="cont">
+                <h2>LOGIN</h2><br />
+                <div class="form-group">
+                    <input type="email" class="form-control" id="loginemail" aria-describedby="emailHelp"
+                        placeholder="Email" name="email" ngModel required>
+                </div><br />
+                <div class="form-group">
+                    <input type="password" class="form-control" id="loginpassword" name="password"
+                        placeholder="Password" ngModel required>
+                </div><br />
+                <button class="btn btn-dark" type="submit">LOGIN</button><br />
+                <div class="alert alert-danger" role="alert" *ngIf="isFormValid">
+                    Please fill all fields.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="areCredentialsInvalid">
+                    Invalid user or password.
+                </div>
+            </div>
+        </div>
+    </form>
+</body>

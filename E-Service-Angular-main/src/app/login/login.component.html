@@ -1,0 +1,43 @@
+<body>
+	<h2>Welcome to EService Portal</h2>
+	<div class="container" id="container">
+
+		<div class="form-container sign-in-container">
+			<form #loginForm="ngForm" (ngSubmit)="loginUser()">
+				<h1>Sign in</h1>
+				<span>to use your account</span>
+				<input type="text" name="email" [(ngModel)]="customer.email" placeholder="EMAIL" />
+				<input type="password" name="password" [(ngModel)]="customer.password" placeholder="Password" />
+				<a routerLink="/login-admin">Are you an admin?</a>
+				<button>Sign In</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" id="signIn">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Wanna Repair Your Products! Don't worry we got your back</h1>
+					<p>Register and Be part of Our family</p>
+					<!--<button class="ghost" id="signUp">Sign Up</button>-->
+					<!--<a [routerLink]="['/registration']">Sign Up</a>-->
+					<div id="registerlink" style="font-size: large;">
+						<p>New user? Create a Account</p>
+						<a routerLink="/register" style="color:black	 "> <button id="btnn">Register</button></a>
+					</div>
+					<div class="container-login100-form-btn m-t-32"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<p>
+			©Eservice
+		</p>
+	</footer>
+
+</body>

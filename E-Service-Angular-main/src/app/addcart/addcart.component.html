@@ -1,0 +1,52 @@
+<section class="cart_section">
+    <div class="container">
+        <h2>CART</h2>
+        <h6 style="color: rgb(9, 102, 29);">WE ARE GIVING A FLAT 50% DISCOUNT ON 25TH AND 26TH AUGUST! LIMITED OFFER, HURRY UP!</h6>
+        <br />
+        <div *ngIf="getCartDetails">
+            <table>
+                <tr>
+                    <th>IMAGE</th>
+                    <th>PRICE</th>
+                    <th>QUANTITY</th>
+                    <th>SUB TOTAL</th>
+                    <th>REMOVE ITEM</th>
+                </tr>
+                <tr *ngFor="let getCartDetail of getCartDetails">
+                    <td><img src="{{getCartDetail.img}}" height="80px" width="80px" alt="P1"></td>
+                    <td>Rs {{getCartDetail.amt}}</td>
+                    <td>
+                        <div class="content">
+                            <button type="button" class="btn"
+                                (click)="incQnt(getCartDetail.prodId,getCartDetail.qnt)"><i
+                                    class="fa fa-plus"></i></button>
+                            <span>{{getCartDetail.qnt}}</span>
+                            <button type="button" class="btn btn-outline-light"
+                                (click)="decQnt(getCartDetail.prodId,getCartDetail.qnt)"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+
+                    </td>
+                    <td>{{getCartDetail.qnt*getCartDetail.amt|number}}</td>
+                    <td><button type="submit" class="btn-dark" (click)="deleteOrder(orders.orderId)">Delete item</button></td>
+
+                </tr>
+            </table>
+            <div class="col-md-6 text-right">
+                <button type="submit" class="removeall btn btn-outline-light" (click)="removeall()"><i
+                        class="fa fa-trash"></i> REMOVE ALL ITEMS</button>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>TOTAL -> Rs. {{total}} /-</h4>
+                </div>
+                <br /> <br />
+                <div>
+                    <button type="submit" id="payment" class="btn btn-outline-success" routerLink="/payment">PROCEED TO
+                        PAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

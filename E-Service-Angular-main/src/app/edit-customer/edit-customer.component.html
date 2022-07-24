@@ -1,0 +1,17 @@
+<div>
+    <div class="form-row">
+        <div class="form-group">
+            <label for="lblfname">Name</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="customerData.name" />
+        </div>
+        <div class="form-group">
+            <label for="lbllname">Phone</label>
+            <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="customerData.phone" />
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" (click)="update()" class="btn btn-primary">
+            UPDATE
+        </button>
+    </div>
+</div>

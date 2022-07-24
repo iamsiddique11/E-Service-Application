@@ -1,0 +1,62 @@
+<!-- 
+<ul *ngFor="let customer of customers">
+    <li>{{ customer.cid}} -- {{ customer.name }} -- {{ customer.email }}  -- {{ customer.phone }} -- {{ customer.address }}</li>
+    <hr>
+</ul> -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark" *ngIf="authenticationService.isAuthenticated">
+    <div class="container-fluid">
+        <a class="navbar-brand" style="color: white;" routerLink="/home-admin">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        &nbsp;
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white;" routerLink="/view-customer">Customers<span
+                            class="sr-only"></span></a>
+                    </li>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <form class="d-flex">
+                    <input [(ngModel)]="term" name="search" class="searchTerm" class="form-control me-2" type="text"
+                        placeholder="Search" aria-label="Search">
+                    <button (click)="sort()" class="btn btn-outline-light" style="border-radius: 0;" name="sort"
+                        type="submit">SORT</button>
+                </form>
+
+            </ul>
+            <div class="nav-item">
+                <button class="btn btn-outline-light" style="border-radius: 0;" (click)="logout()">Logout</button>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<table class="table" *ngIf="authenticationService.isAuthenticated">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col" class="cid" id="cid">ID</th>
+            <th scope="col">NAME</th>
+            <th scope="col">EMAIL</th>
+            <th scope="col">PHONE</th>
+            <th scope="col">GENDER</th>
+            <th scope="col">ACTION</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let customer of customers | filter:term">
+            <th class="cid" scope="row">{{ customer.cid}}</th>
+            <td>{{ customer.name }}</td>
+            <td>{{ customer.email }}</td>
+            <td>{{ customer.phone }} </td>
+            <td>{{ customer.gender }} </td>
+            <td>
+                <button type="submit" routerLink="/edit-customer/{{ customer.cid }}" class="btn btn-dark">
+                    EDIT
+                </button>&nbsp;
+                <button style="border-radius: 0;" (click)="deleteCustomer(customer.cid)"
+                    class="btn btn-dark">DELETE</button></td>
+        </tr>
+    </tbody>
+</table>

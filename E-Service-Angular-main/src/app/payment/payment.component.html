@@ -1,0 +1,71 @@
+<body>
+    <form class="form-signin" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div class="login">
+            <div class="form-body" id="user-data" ngModelGroup="userData" #userData="ngModelGroup" class="cont">
+                <h2>PAYMENT DETAILS</h2><br />
+                <div class="form-group">
+                    <label>CARD NUMBER:</label><br/>
+                    <input type="number" inputmode="numeric" name="cardNumber" 
+                required class="card-number" 
+                min="16" max="16" #cardNumber="ngModel" ngModel [(ngModel)]="paymentDetails.cardNumber" >
+                <br/>
+                <span style="color: red" class="help-block" *ngIf="!cardNumber.valid && cardNumber.touched">
+                    This is a required field
+                </span>
+{{paymentDetails.cardNumber}}
+                </div><br />
+                <div class="form-group">
+                    <label>EXPIRY MONTH:</label><br/>
+                    <select #month="ngModel" ngModel 
+                    required [(ngModel)]="paymentDetails.month"required name="month">
+                        <option value="none" selected disabled>MONTH</option>
+                        <option value="january">January</option>
+                        <option value="february">February</option>
+                        <option value="march">March</option>
+                        <option value="april">April</option>
+                        <option value="may">May</option>
+                        <option value="june">June</option>
+                        <option value="july">July</option>
+                        <option value="august">August</option>
+                        <option value="september">September</option>
+                        <option value="october">October</option>
+                        <option value="november">November</option>
+                        <option value="december">December</option>
+                    </select><br/>
+                    <span style="color: red" class="help-block" *ngIf="!month.valid && month.touched">
+                        This is a required field
+                    </span>
+                </div><br />
+                <div class="form-group">
+                    <label>EXPIRY YEAR:</label><br/>
+                    <select [(ngModel)]="paymentDetails.year" name="year"
+                    #year="ngModel" ngModel required ><br/>
+                        <option value="none" selected disabled>YEAR</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select><br/>
+                    <span style="color: red" class="help-block" *ngIf="!year.valid && year.touched">
+                        This is a required field
+                    </span>
+                </div><br />
+                <div class="form-group">
+                    <label>CVV:</label><br/>
+                    <input type="password" inputmode="numeric" [(ngModel)]="paymentDetails.cvv" 
+                    #cvv="ngModel" ngModel name="cvv" required minlength="3" maxlength="3" ><br/>
+                    <span style="color: red" class="help-block" *ngIf="!cvv.valid && cvv.touched">
+                        This is a required field
+                    </span>
+                </div><br /><br/>
+                <button class="btn btn-dark" routerLink="/home" [disabled]="f.form.invalid" (click)="payment()" type="submit">PAY</button><br />
+            </div>
+        </div>
+    </form>
+</body>

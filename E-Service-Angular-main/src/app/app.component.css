@@ -1,0 +1,35 @@
+.nav-link{
+    background: var(--bg-danger);
+    border-color:var(--bg-danger) ;
+    padding:0.8rem 1.5rem;
+    
+    font-weight: 500;
+}
+.nav-link:hover{
+    color:var(--text-danger);
+    background: transparent;
+}
+ #top .by-light{
+     box-shadow:0 0.125rem 0.675rem rgb(0 0 0/5%);
+
+ }
+ .navbar-brand{
+     padding:0.8 2rem;
+     color:black;
+     font-size: 30px;
+     font-family:'Times New Roman', Times, serif;
+     font-weight: bolder;
+ }
+ #top .navbar-nav .nav-item .nav-link:hover{
+     color:rgb(12, 11, 11) ;
+ }
+ .cart_value{
+    padding: 4px 10px;
+    top: -2px;
+    position: absolute;
+    right: -5px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    
+    font-size: 16px;
+ }

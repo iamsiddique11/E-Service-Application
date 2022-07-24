@@ -1,0 +1,24 @@
+<div class="title">
+  <h1> Our Services</h1>
+</div>
+  <div class="card shadow-sm"  class="container">
+    <div class="card-body" class="container text-center">
+      <div  *ngFor="let prod of productArray">
+        <div class="product-image">
+          <img src="{{prod.img}}" alt="P1">
+        </div>
+        <div class="content">
+          <h4>{{prod.amt}}</h4>
+          <button type="button" class="btn" (click)="inc(prod)"><i class="fa fa-plus"></i></button>
+          <span>{{prod.qnt}}</span>
+          <button type="button" class="btn" (click)="dec(prod)"><i class="fa fa-minus"></i></button>
+        </div>
+        <div>
+          <button type="button" class=" btn btn-dark cart_btn" (click)="addCart(prod)">Add to cart</button>
+          <br/><br/>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="itemsCart.length > 0;"></div>
+  
