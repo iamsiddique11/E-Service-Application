@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	<mvc:annotation-driven />
+	<context:component-scan base-package="com.project.*"></context:component-scan>
+	<context:property-placeholder location="classpath:database.properties" />
+	<context:property-placeholder location="classpath:log4j.properties" />
+	<tx:annotation-driven />
+	<bean
+		id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property
+			name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView"></property>
+		<property
+			name="prefix"
+			value="/WEB-INF/"></property>
+		<property
+			name="suffix"
+			value=".jsp"></property>
+	</bean>
+	<bean
+		id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property
+			name="driverClassName"
+			value="${database.driver}"></property>
+		<property
+			name="url"
+			value="${database.url}"></property>
+		<property
+			name="username"
+			value="${database.username}"></property>
+		<property
+			name="password"
+			value="${database.password}"></property>
+	</bean>
+	<bean
+		id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property
+			name="dataSource"
+			ref="dataSource"></property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.project.model.Customer</value>
+				<value>com.project.model.Orders</value>
+				<value>com.project.model.Payment</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean
+		id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property
+			name="sessionFactory"
+			ref="sessionFactory"></property>
+	</bean>
+	<bean
+		id="customer"
+		class="com.project.model.Customer" />
+	<bean
+		id="customerRepository"
+		class="com.project.repository.CustomerRepositoryImpl" />
+	<bean
+		id="customerService"
+		class="com.project.service.CustomerServiceImpl" />
+	<bean id="orders" class="com.project.model.Orders" />
+	<bean id="orderRepository"
+		class="com.project.repository.OrderRepositoryImpl" />
+	<bean id="orderService"
+		class="com.project.service.OrderServiceImpl" />
+	<bean id="payment" class="com.project.model.Payment" />
+	<bean id="paymentRepository"
+		class="com.project.repository.PaymentRepositoryImpl" />
+	<bean id="paymentService"
+		class="com.project.service.PaymentServiceImpl" />
+</beans>

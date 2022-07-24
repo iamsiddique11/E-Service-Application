@@ -1,0 +1,248 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "E-Service System"
+host: "localhost:8080"
+basePath: "/EServiceSystem"
+tags:
+- name: "customer"
+  description: "Everything about customers"
+- name: "order"
+  description: "Access your orders"
+- name: "payment"
+  description: "Payment records"
+schemes:
+- "http"
+paths:
+  /customer/createCustomer:
+    post:
+      tags:
+      - "customer"
+      summary: "Create customers"
+      description: "Adds customer into database"
+      operationId: "createCustomer"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Customer"
+      responses:
+        "405":
+          description: "Invalid input"
+  /customer/allCustomers:
+    get:
+      tags:
+      - "customer"
+      summary: "List of customers"
+      description: "Displays a list of all customers who have registered"
+      operationId: "allCustomers"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+  /customer/getCustomerById/{cid}:
+    get:
+      tags:
+      - "customer"
+      summary: "Find customer by ID"
+      description: "Returns a customer having specified by ID"
+      operationId: "getCustomerById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cid"
+        in: "path"
+        description: "ID of customer to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Customer"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Customer not found"
+  /customer/updateProfile:
+    put:
+      tags:
+      - "customer"
+      summary: "Update an existing customer"
+      description: "Updates name and phone no. of existing customer"
+      operationId: "updateProfile"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Customer"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Customer not found"
+        "405":
+          description: "Validation exception"
+  /customer/deleteCustomer/{cid}:
+    delete:
+      tags:
+      - "customer"
+      summary: "Deletes a customer"
+      description: "Deletes a customer having the specified ID"
+      operationId: "deleteCustomer"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "cid"
+        in: "path"
+        description: "Customer id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Customer not found"
+  /order/createOrder:
+    post:
+      tags:
+      - "order"
+      summary: "Create orders"
+      description: "Adds order into the database"
+      operationId: "createOrder"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Orders"
+      responses:
+        "405":
+          description: "Invalid input"
+  /order/allOrders:
+    get:
+      tags:
+      - "order"
+      summary: "List of orders"
+      description: "Displays a list of orders"
+      operationId: "allOrders"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "object"
+  /order/deleteOrder/{orderId}:
+    delete:
+      tags:
+      - "order"
+      summary: "Deletes an order"
+      description: "Deletes the order having specified ID"
+      operationId: "deleteOrder"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "orderId"
+        in: "path"
+        description: "order id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "order not found"
+  /payment/addPayment:
+    post:
+      tags:
+      - "payment"
+      summary: "Record payment details"
+      description: "Adds payment details to the database"
+      operationId: "addPayment"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Payment"
+      responses:
+        "405":
+          description: "Invalid input"
+definitions:
+  Customer:
+    type: "object"
+    properties:
+      cid:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      phone:
+        type: "string"
+      address:
+        type: "string"
+      email:
+        type: "string"
+      password:
+        type: "string"
+      confirmpassword:
+        type: "string"
+      gender:
+        type: "string"
+  Orders:
+    type: "object"
+    properties:
+      orderId:
+        type: "integer"
+        format: "int64"
+      quantity:
+        type: "integer"
+        format: "int64"
+      price:
+        type: "integer"
+        format: "int64"
+      total:
+        type: "integer"
+        format: "int64"
+  Payment:
+    type: "object"
+    properties:
+      paymentId:
+        type: "integer"
+        format: "int64"
+      cardNumber:
+        type: "integer"
+        format: "long"
+      month:
+        type: "string"
+      year:
+        type: "integer"
+        format: "int64"
+      cvv:
+        type: "integer"
+        format: "int64"
